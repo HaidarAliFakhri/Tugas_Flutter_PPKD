@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:haidar_ppkd/tugas/tugas1.dart';
-import 'package:haidar_ppkd/tugas/tugas2.dart';
+
+import 'tugas/tugas4.dart'; // ubah sni
 
 void main() {
   runApp(const MyApp());
@@ -12,9 +12,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Profil Lengkap',
+      debugShowCheckedModeBanner: false,
+      title: 'Tugas Flutter',
       theme: ThemeData(primarySwatch: Colors.teal),
-      home: const ProfilLengkapPage(),
+      home: const Tugas4Page(), //ubah sni
     );
   }
 }

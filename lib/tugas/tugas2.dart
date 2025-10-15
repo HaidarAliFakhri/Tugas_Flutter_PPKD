@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ProfilLengkapPage extends StatelessWidget {
-  const ProfilLengkapPage({super.key});
+class Tugas2Page extends StatelessWidget {
+  const Tugas2Page({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,26 +16,38 @@ class ProfilLengkapPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Baris 1: Nama lengkap di tengah
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ShaderMask(
-                shaderCallback: (bounds) =>
-                    const LinearGradient(
-                      colors: [Colors.teal, Colors.blue, Colors.purple],
-                    ).createShader(
-                      Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Foto profil lingkaran
+              const CircleAvatar(
+                radius: 60,
+                backgroundImage: AssetImage('assets/images/haidar.jpg'),
+              ),
+              const SizedBox(height: 1),
+
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: ShaderMask(
+                    shaderCallback: (bounds) =>
+                        const LinearGradient(
+                          colors: [Colors.teal, Colors.blue, Colors.purple],
+                        ).createShader(
+                          Rect.fromLTWH(0, 0, bounds.width, bounds.height),
+                        ),
+                    child: const Text(
+                      "Haidar Ali Fakhri",
+                      style: TextStyle(
+                        fontSize: 19,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
-                child: const Text(
-                  "Haidar Ali Fakhri",
-                  style: TextStyle(
-                    fontSize: 34,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
                   ),
                 ),
               ),
-            ),
+            ],
           ),
 
           // Baris 2: Email
@@ -133,20 +145,18 @@ class ProfilLengkapPage extends StatelessWidget {
                 "Haidar adalah mahasiswa Teknik Informatika yang memiliki minat kuat pada dunia teknologi, "
                 "khususnya dalam pengembangan aplikasi mobile dan desain antarmuka pengguna. "
                 "Ia senang mengeksplorasi cara baru untuk menggabungkan logika pemrograman dengan sentuhan estetika visual, "
-                "sehingga setiap karya yang dibuatnya tidak hanya berfungsi dengan baik, tetapi juga nyaman digunakan. "
-                "Saat ini Haidar sedang mendalami Flutter sebagai langkah awal membangun aplikasi lintas platform "
-                "yang responsif, modern, dan bermanfaat bagi banyak orang. ",
+                "sehingga setiap karya yang dibuatnya tidak hanya berfungsi dengan baik, tetapi juga nyaman digunakan. ",
                 textAlign: TextAlign.justify,
                 style: TextStyle(fontSize: 14, height: 1.5),
               ),
             ),
           ),
 
-          const SizedBox(height: 50),
+          const SizedBox(height: 30),
 
           // Baris 6: Hiasan visual bawah
           Container(
-            height: 70,
+            height: 50,
             width: double.infinity,
             decoration: const BoxDecoration(
               color: Colors.teal,
