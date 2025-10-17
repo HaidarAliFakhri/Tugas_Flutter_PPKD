@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'tugas/tugas5.dart'; // ubah sni
+import 'tugas/tugasslicing1.dart'; // ubah sni
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Tugas Flutter',
       theme: ThemeData(primarySwatch: Colors.teal),
-      home: const Tugas5Page(), //ubah sni
+      home: const Tugasslicing1(), //ubah sni
     );
   }
 }
