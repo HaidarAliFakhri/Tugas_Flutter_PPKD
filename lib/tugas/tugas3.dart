@@ -101,7 +101,7 @@ class Tugas3Page extends StatelessWidget {
             const SizedBox(height: 12),
 
             GridView.count(
-              crossAxisCount: 2,
+              crossAxisCount: 3,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               crossAxisSpacing: 8,

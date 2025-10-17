@@ -7,12 +7,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:haidar_ppkd/tugas/tugas2.dart';
+//import 'package:haidar_ppkd/tugas/tugas2.dart';
+import 'package:haidar_ppkd/tugas/tugas5.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const ProfilLengkapPage());
+    await tester.pumpWidget(const Tugas5Page());
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);
