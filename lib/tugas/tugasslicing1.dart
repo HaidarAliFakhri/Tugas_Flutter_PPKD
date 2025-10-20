@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haidar_ppkd/tugas/homepage.dart';
 
 class Tugasslicing1 extends StatelessWidget {
   const Tugasslicing1({super.key});
@@ -119,7 +120,12 @@ class Tugasslicing1 extends StatelessWidget {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => HomePage()),
+                    );
+                  },
                   child: const Text("Login", style: TextStyle(fontSize: 18)),
                 ),
               ),
