@@ -28,7 +28,7 @@ class _Tugas7PageState extends State<Tugas7Page> {
     setState(() {
       _selectedIndex = index;
     });
-    Navigator.pop(context); // tutup drawer setelah klik menu
+    Navigator.pop(context); 
   }
 
   @override
@@ -53,7 +53,7 @@ class _Tugas7PageState extends State<Tugas7Page> {
               ),
             ),
 
-            // Menu Home
+            
             ListTile(
               leading: const Icon(Icons.check_box),
               title: const Text("chekbox & switch"),
@@ -63,7 +63,7 @@ class _Tugas7PageState extends State<Tugas7Page> {
             ),
             const Divider(),
 
-            // Menu Payment
+            
             ListTile(
               leading: const Icon(Icons.dark_mode),
               title: const Text("Switch"),
@@ -97,14 +97,14 @@ class _Tugas7PageState extends State<Tugas7Page> {
               },
             ),
 
-            // Menu Logout
+            
             ListTile(
               leading: const Icon(Icons.logout, color: Colors.red),
               title: const Text("Logout", style: TextStyle(color: Colors.red)),
               onTap: () {
                 Navigator.pop(context);
                 MaterialPageRoute(builder: (context) => const HomePage());
-                // tambahkan aksi logout di sini nanti
+                
               },
             ),
           ],

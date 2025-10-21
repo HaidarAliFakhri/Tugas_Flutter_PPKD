@@ -14,7 +14,7 @@ class _Tugas8PageState extends State<Tugas8Page> {
 
   @override
   Widget build(BuildContext context) {
-    // Daftar halaman yang akan ditampilkan
+    
     final List<Widget> pages = [
       const Tugas7Page(),
       Padding(
@@ -54,7 +54,7 @@ class _Tugas8PageState extends State<Tugas8Page> {
         title: Text("Home Page", style: GoogleFonts.poppins(fontSize: 20)),
         backgroundColor: const Color.fromARGB(255, 44, 95, 158),
       ),
-      body: pages[_selectedIndex], // Tampilkan halaman sesuai tab yang dipilih
+      body: pages[_selectedIndex], 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: (index) {

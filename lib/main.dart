@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Tugas 7 & 8',
       theme: ThemeData(primarySwatch: Colors.teal),
-      home: const Tugas8Page(), // Arahkan ke Tugas 8 karena dia punya Tugas 7 di dalamnya
+      home: const Tugas8Page(), 
       locale: const Locale('id', 'ID'),
       supportedLocales: const [
         Locale('en', 'US'),
