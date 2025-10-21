@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:haidar_ppkd/tugas/hari16/tugas8.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-import 'tugas/tugasslicing1.dart'; // ubah sni
-
-void main() {
+void main() async {
+  await initializeDateFormatting('id_ID', null);
   runApp(const MyApp());
 }
 
@@ -15,7 +16,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Tugas Flutter',
       theme: ThemeData(primarySwatch: Colors.teal),
-      home: const Tugasslicing1(), //ubah sni
+      home: const Tugas8Page(),
+      //ubah sni
     );
   }
 }
