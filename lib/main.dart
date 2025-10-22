@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:haidar_ppkd/tugas/hari17/tugas9_list.dart';
+import 'package:haidar_ppkd/tugas/hari17/tugas9.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,11 +10,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Tugas 9 Flutter',
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorSchemeSeed: Colors.orange, useMaterial3: true),
-      home: const Tugas9PageList(),
+      home: Tugas9DrawerPage(),
     );
   }
 }
