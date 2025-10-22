@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:haidar_ppkd/tugas/hari16/tugas8.dart';
+import 'package:haidar_ppkd/tugas/hari17/tugas9_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,20 +11,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Tugas 9 Flutter',
       debugShowCheckedModeBanner: false,
-      title: 'Tugas 7 & 8',
-      theme: ThemeData(primarySwatch: Colors.teal),
-      home: const Tugas8Page(), 
-      locale: const Locale('id', 'ID'),
-      supportedLocales: const [
-        Locale('en', 'US'),
-        Locale('id', 'ID'),
-      ],
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
+      theme: ThemeData(colorSchemeSeed: Colors.orange, useMaterial3: true),
+      home: const Tugas9PageList(),
     );
   }
 }
