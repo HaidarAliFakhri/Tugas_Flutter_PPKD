@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:haidar_ppkd/tugas/hari16/tugas7.dart';
+import 'package:haidar_ppkd/tugas/hari16/drawer_tugas7.dart';
 
 class Tugas8Page extends StatefulWidget {
   const Tugas8Page({super.key});

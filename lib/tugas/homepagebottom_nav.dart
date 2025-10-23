@@ -2,7 +2,8 @@ import 'package:circle_bottom_navigation/circle_bottom_navigation.dart';
 import 'package:circle_bottom_navigation/widgets/tab_data.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:haidar_ppkd/tugas/listtugas_drawer.dart';
+//import 'package:haidar_ppkd/tugas/hari1/listtugas_drawer.dart';
+import 'package:haidar_ppkd/tugas/hari16/drawer_tugas7.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -42,7 +43,7 @@ class _HomePageState extends State<HomePage> {
           if (index == 1) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => const Listtugas()),
+              MaterialPageRoute(builder: (context) => const Tugas7Page()),
             );
           }
         },

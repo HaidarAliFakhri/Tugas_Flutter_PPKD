@@ -1,34 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:haidar_ppkd/tugas/hari16/checkbox.dart';
-import 'package:haidar_ppkd/tugas/hari16/datepicker.dart';
-import 'package:haidar_ppkd/tugas/hari16/dropdawn.dart';
 import 'package:haidar_ppkd/tugas/hari16/switch.dart';
-import 'package:haidar_ppkd/tugas/hari16/timepicker.dart';
 import 'package:haidar_ppkd/tugas/homepagebottom_nav.dart';
+import 'package:haidar_ppkd/tugas/hari1/tugas5.dart';
 
-class Tugas7Page extends StatefulWidget {
-  const Tugas7Page({super.key});
+class Listtugas extends StatefulWidget {
+  const Listtugas({super.key});
 
   @override
-  State<Tugas7Page> createState() => _Tugas7PageState();
+  State<Listtugas> createState() => _Listtugas();
 }
 
-class _Tugas7PageState extends State<Tugas7Page> {
+class _Listtugas extends State<Listtugas> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = [
     Checkboxtugas7(),
     Modegelap(),
-    DropdownKategoriProduk(),
-    Datepickertugas7(),
-    Timepickertugas7(),
+
+    Tugas5Page(),
   ];
 
   void onTapDrawer(int index) {
     setState(() {
       _selectedIndex = index;
     });
-    Navigator.pop(context); 
+    Navigator.pop(context); // tutup drawer setelah klik menu
   }
 
   @override
@@ -53,58 +50,44 @@ class _Tugas7PageState extends State<Tugas7Page> {
               ),
             ),
 
-            
+            // Menu Home
             ListTile(
-              leading: const Icon(Icons.check_box),
-              title: const Text("chekbox & switch"),
+              leading: const Icon(Icons.home),
+              title: const Text("Tugas 1"),
               onTap: () {
                 onTapDrawer(0);
               },
             ),
             const Divider(),
 
-            
+            // Menu Payment
             ListTile(
-              leading: const Icon(Icons.dark_mode),
-              title: const Text("Switch"),
+              leading: const Icon(Icons.cake),
+              title: const Text("Tugas 2"),
               onTap: () {
                 onTapDrawer(1);
               },
             ),
             const Divider(),
 
+            // Menu Settings tambahan
             ListTile(
               leading: const Icon(Icons.vaccines),
-              title: const Text("Dropdawn"),
+              title: const Text("Tugas 5"),
               onTap: () {
                 onTapDrawer(2);
               },
             ),
             const Divider(),
-            ListTile(
-              leading: const Icon(Icons.date_range),
-              title: const Text("Datepicker"),
-              onTap: () {
-                onTapDrawer(3);
-              },
-            ),
-            const Divider(),
-            ListTile(
-              leading: const Icon(Icons.access_time),
-              title: const Text("Timepicker"),
-              onTap: () {
-                onTapDrawer(4);
-              },
-            ),
 
-            
+            // Menu Logout
             ListTile(
               leading: const Icon(Icons.logout, color: Colors.red),
               title: const Text("Logout", style: TextStyle(color: Colors.red)),
               onTap: () {
                 Navigator.pop(context);
                 MaterialPageRoute(builder: (context) => const HomePage());
-                
+                // tambahkan aksi logout di sini nanti
               },
             ),
           ],

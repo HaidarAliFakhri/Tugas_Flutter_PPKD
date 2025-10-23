@@ -1,31 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:haidar_ppkd/tugas/day_18/login_page.dart';
 import 'package:haidar_ppkd/tugas/hari16/checkbox.dart';
+import 'package:haidar_ppkd/tugas/hari16/datepicker.dart';
+import 'package:haidar_ppkd/tugas/hari16/dropdawn.dart';
 import 'package:haidar_ppkd/tugas/hari16/switch.dart';
-import 'package:haidar_ppkd/tugas/homepagebottom_nav.dart';
-import 'package:haidar_ppkd/tugas/tugas5.dart';
+import 'package:haidar_ppkd/tugas/hari16/timepicker.dart';
 
-class Listtugas extends StatefulWidget {
-  const Listtugas({super.key});
+import 'package:haidar_ppkd/tugas/preferences/preference_handler.dart';
+
+
+class Tugas7Page extends StatefulWidget {
+  const Tugas7Page({super.key});
 
   @override
-  State<Listtugas> createState() => _Listtugas();
+  State<Tugas7Page> createState() => _Tugas7PageState();
 }
 
-class _Listtugas extends State<Listtugas> {
+class _Tugas7PageState extends State<Tugas7Page> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = [
     Checkboxtugas7(),
     Modegelap(),
-
-    Tugas5Page(),
+    DropdownKategoriProduk(),
+    Datepickertugas7(),
+    Timepickertugas7(),
   ];
 
   void onTapDrawer(int index) {
     setState(() {
       _selectedIndex = index;
     });
-    Navigator.pop(context); // tutup drawer setelah klik menu
+    Navigator.pop(context); 
   }
 
   @override
@@ -41,7 +47,7 @@ class _Listtugas extends State<Listtugas> {
             // Bagian header drawer
             const UserAccountsDrawerHeader(
               accountName: Text("haidar"),
-              accountEmail: Text("haidar@ppkd.id"),
+              accountEmail: Text("haidar@gmail.com"),
               currentAccountPicture: CircleAvatar(
                 backgroundImage: AssetImage("assets/images/haidar.jpg"),
               ),
@@ -50,46 +56,62 @@ class _Listtugas extends State<Listtugas> {
               ),
             ),
 
-            // Menu Home
+            
             ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text("Tugas 1"),
+              leading: const Icon(Icons.check_box),
+              title: const Text("chekbox & switch"),
               onTap: () {
                 onTapDrawer(0);
               },
             ),
             const Divider(),
 
-            // Menu Payment
+            
             ListTile(
-              leading: const Icon(Icons.cake),
-              title: const Text("Tugas 2"),
+              leading: const Icon(Icons.dark_mode),
+              title: const Text("Switch"),
               onTap: () {
                 onTapDrawer(1);
               },
             ),
             const Divider(),
 
-            // Menu Settings tambahan
             ListTile(
               leading: const Icon(Icons.vaccines),
-              title: const Text("Tugas 5"),
+              title: const Text("Dropdawn"),
               onTap: () {
                 onTapDrawer(2);
               },
             ),
             const Divider(),
-
-            // Menu Logout
             ListTile(
-              leading: const Icon(Icons.logout, color: Colors.red),
-              title: const Text("Logout", style: TextStyle(color: Colors.red)),
+              leading: const Icon(Icons.date_range),
+              title: const Text("Datepicker"),
               onTap: () {
-                Navigator.pop(context);
-                MaterialPageRoute(builder: (context) => const HomePage());
-                // tambahkan aksi logout di sini nanti
+                onTapDrawer(3);
               },
             ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.access_time),
+              title: const Text("Timepicker"),
+              onTap: () {
+                onTapDrawer(4);
+              },
+            ),
+
+            Divider(),
+            ListTile(
+              onTap: () {
+                PreferenceHandler.removeLogin();
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPageCanva()),
+                  (route) => false,
+                );
+              },
+              leading: Icon(Icons.outbond),
+              title: Text("LogOut"),),
           ],
         ),
       ),

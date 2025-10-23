@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:haidar_ppkd/tugas/homepagebottom_nav.dart';
 import 'package:haidar_ppkd/tugas/preferences/preference_handler.dart';
-import 'package:haidar_ppkd/tugas/tugasslicing1.dart';
+import 'package:haidar_ppkd/tugas/day_18/Login_Page.dart';
 
 class SplashScreenDay18 extends StatefulWidget {
   const SplashScreenDay18({super.key});
@@ -30,7 +30,7 @@ class _SplashScreenDay18State extends State<SplashScreenDay18> {
       } else {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => Tugasslicing1()),
+          MaterialPageRoute(builder: (context) => LoginPageCanva()),
           (route) => false,
         );
       }
@@ -46,7 +46,7 @@ class _SplashScreenDay18State extends State<SplashScreenDay18> {
         children: [
           Center(child: Image.asset('assets/images/haidar.jpg')),
           Text(
-            "Apel Apps",
+            "Hai Time",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
         ],
