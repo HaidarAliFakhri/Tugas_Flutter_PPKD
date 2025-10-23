@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:haidar_ppkd/tugas/hari16/buttom_nav_tugas8.dart';
 import 'package:haidar_ppkd/tugas/hari18/tugas10.dart';
-import 'package:haidar_ppkd/tugas/bottom_nav.dart';
+
 import 'package:haidar_ppkd/tugas/preferences/preference_handler.dart';
 
 
@@ -167,7 +168,7 @@ class _LoginPageCanvaState extends State<LoginPageCanva> {
         // Arahkan ke HomePage
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (_) => const HomePage()),
+          MaterialPageRoute(builder: (_) => const Tugas8Page()),
         );
       } else {
         // Jika form belum valid

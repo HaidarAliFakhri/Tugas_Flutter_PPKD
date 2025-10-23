@@ -39,7 +39,7 @@ class _Tugas7PageState extends State<Tugas7Page> {
     return Scaffold(
       appBar: AppBar(title: const Text("Drawer")),
 
-      // --- Drawer mulai di sini ---
+      
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -116,7 +116,7 @@ class _Tugas7PageState extends State<Tugas7Page> {
         ),
       ),
 
-      // --- Drawer selesai di sini ---
+      
       body: _widgetOptions[_selectedIndex],
     );
   }

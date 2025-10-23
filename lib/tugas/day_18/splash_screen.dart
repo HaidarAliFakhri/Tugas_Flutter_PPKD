@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:haidar_ppkd/tugas/bottom_nav.dart';
+//import 'package:haidar_ppkd/tugas/bottom_nav.dart';
+import 'package:haidar_ppkd/tugas/hari16/buttom_nav_tugas8.dart';
 import 'package:haidar_ppkd/tugas/preferences/preference_handler.dart';
 import 'package:haidar_ppkd/tugas/day_18/Login_Page.dart';
 
@@ -24,7 +25,7 @@ class _SplashScreenDay18State extends State<SplashScreenDay18> {
       if (isLogin != null && isLogin == true) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => HomePage()),
+          MaterialPageRoute(builder: (context) => Tugas8Page()),
           (route) => false,
         );
       } else {

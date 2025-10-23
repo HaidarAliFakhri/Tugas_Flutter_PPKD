@@ -50,10 +50,7 @@ class _Tugas8PageState extends State<Tugas8Page> {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Home Page", style: GoogleFonts.poppins(fontSize: 20)),
-        backgroundColor: const Color.fromARGB(255, 44, 95, 158),
-      ),
+      
       body: pages[_selectedIndex], 
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
