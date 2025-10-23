@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:haidar_ppkd/tugas/hari16/checkbox.dart';
 import 'package:haidar_ppkd/tugas/hari16/switch.dart';
-import 'package:haidar_ppkd/tugas/homepagebottom_nav.dart';
+import 'package:haidar_ppkd/tugas/bottom_nav.dart';
 import 'package:haidar_ppkd/tugas/hari1/tugas5.dart';
 
 class Listtugas extends StatefulWidget {

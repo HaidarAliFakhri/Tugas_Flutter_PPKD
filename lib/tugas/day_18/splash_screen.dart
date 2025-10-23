@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:haidar_ppkd/tugas/homepagebottom_nav.dart';
+import 'package:haidar_ppkd/tugas/bottom_nav.dart';
 import 'package:haidar_ppkd/tugas/preferences/preference_handler.dart';
 import 'package:haidar_ppkd/tugas/day_18/Login_Page.dart';
 

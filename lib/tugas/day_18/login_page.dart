@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:haidar_ppkd/tugas/hari18/tugas10.dart';
-import 'package:haidar_ppkd/tugas/homepagebottom_nav.dart';
+import 'package:haidar_ppkd/tugas/bottom_nav.dart';
 
 class LoginPageCanva extends StatefulWidget {
   const LoginPageCanva({super.key});
