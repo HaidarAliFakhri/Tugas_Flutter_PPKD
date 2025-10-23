@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:haidar_ppkd/tugas/hari18/tugas10.dart';
 import 'package:haidar_ppkd/tugas/bottom_nav.dart';
+import 'package:haidar_ppkd/tugas/preferences/preference_handler.dart';
+
+
+
 
 class LoginPageCanva extends StatefulWidget {
   const LoginPageCanva({super.key});
@@ -150,18 +154,45 @@ class _LoginPageCanvaState extends State<LoginPageCanva> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
+                   onPressed: () async {
+      if (_formKey.currentState!.validate()) {
+        // Simpan status login
+        await PreferenceHandler.saveLogin(true);
+
+        // Tampilkan snackbar sukses
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Login berhasil!')),
+        );
+
+        // Arahkan ke HomePage
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => const HomePage()),
+        );
+      } else {
+        // Jika form belum valid
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text("Validation Error"),
+              content: const Text("Silakan isi semua field dengan benar."),
+              actions: [
+                TextButton(
+                  child: const Text("OK"),
                   onPressed: () {
-            if (_formKey.currentState!.validate()) {
-              // validasi sukses → lanjut login
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Login berhasil!')),
-              );
-              Navigator.push(context, MaterialPageRoute(builder: (_) => HomePage()));
-            }
-          },
-          child: const Text("Login", style: TextStyle(fontSize: 18)),
+                    Navigator.pop(context);
+                  },
                 ),
-              ),
+              ],
+            );
+          },
+        );
+      }
+    },
+    child: const Text("Login", style: TextStyle(fontSize: 18)),
+  ),
+),
 
               const SizedBox(height: 20),
 

@@ -18,7 +18,7 @@ class _SplashScreenDay18State extends State<SplashScreenDay18> {
   }
 
   isLoginFunction() async {
-    Future.delayed(Duration(seconds: 3)).then((value) async {
+    Future.delayed(Duration(seconds: 5)).then((value) async {
       var isLogin = await PreferenceHandler.getLogin();
       print(isLogin);
       if (isLogin != null && isLogin == true) {
@@ -44,9 +44,9 @@ class _SplashScreenDay18State extends State<SplashScreenDay18> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(child: Image.asset('assets/images/haidar.jpg')),
+          Center(child: Image.asset('assets/images/jempol.jpg')),
           Text(
-            "Hai Time",
+            "Welcome!!",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
         ],
