@@ -1,0 +1,56 @@
+import 'package:flutter/material.dart';
+import 'package:haidar_ppkd/tugas/homepagebottom_nav.dart';
+import 'package:haidar_ppkd/tugas/preferences/preference_handler.dart';
+import 'package:haidar_ppkd/tugas/tugasslicing1.dart';
+
+class SplashScreenDay18 extends StatefulWidget {
+  const SplashScreenDay18({super.key});
+
+  @override
+  State<SplashScreenDay18> createState() => _SplashScreenDay18State();
+}
+
+class _SplashScreenDay18State extends State<SplashScreenDay18> {
+  @override
+  void initState() {
+    super.initState();
+    isLoginFunction();
+  }
+
+  isLoginFunction() async {
+    Future.delayed(Duration(seconds: 3)).then((value) async {
+      var isLogin = await PreferenceHandler.getLogin();
+      print(isLogin);
+      if (isLogin != null && isLogin == true) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+          (route) => false,
+        );
+      } else {
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => Tugasslicing1()),
+          (route) => false,
+        );
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(child: Image.asset('assets/images/haidar.jpg')),
+          Text(
+            "Apel Apps",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
+    );
+  }
+}
