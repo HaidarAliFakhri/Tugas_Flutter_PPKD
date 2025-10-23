@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:haidar_ppkd/tugas/hari18/tugas10.dart';
 import 'package:haidar_ppkd/tugas/homepagebottom_nav.dart';
 
 class Tugasslicing1 extends StatelessWidget {
@@ -141,7 +142,15 @@ class Tugasslicing1 extends StatelessWidget {
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const FormPendaftaran(),
+                          ),
+                        );
+                      },
+
                       child: const Text(
                         "Register",
                         style: TextStyle(

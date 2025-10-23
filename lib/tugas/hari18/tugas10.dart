@@ -68,10 +68,10 @@ class _FormPendaftaranState extends State<FormPendaftaran> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Formulir Pendaftaran HaiTime",
+          "Formulir Pendaftaran",
           style: GoogleFonts.poppins(fontSize: 20),
         ),
-        backgroundColor: Colors.lightBlueAccent,
+        backgroundColor: Colors.deepPurple,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -136,10 +136,7 @@ class _FormPendaftaranState extends State<FormPendaftaran> {
                     value == null || value.isEmpty ? "wajib diisi" : null,
               ),
               const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: _submitForm,
-                child: const Text("Daftar"),
-              ),
+              TextButton(onPressed: _submitForm, child: const Text("Daftar")),
             ],
           ),
         ),

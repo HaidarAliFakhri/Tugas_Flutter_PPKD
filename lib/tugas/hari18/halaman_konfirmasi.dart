@@ -1,29 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:haidar_ppkd/tugas/homepagebottom_nav.dart';
+
 class HalamanKonfirmasi extends StatelessWidget {
   final String nama;
   final String kota;
 
-  const HalamanKonfirmasi({
-    super.key,
-    required this.nama,
-    required this.kota,
-  });
+  const HalamanKonfirmasi({super.key, required this.nama, required this.kota});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Konfirmasi Pendaftaran",style: GoogleFonts.poppins(
-            fontSize: 20,),
-            ),
-      backgroundColor:Colors.lightBlueAccent,),
-      body: Center(
+      body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
-          child: Text(
-            "Terima kasih, $nama dari $kota telah mendaftar.",
-            style: const TextStyle(fontSize: 18),
-            textAlign: TextAlign.center,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const SizedBox(height: 60),
+
+              Center(
+                child: Image.asset(
+                  'assets/images/jempol.jpg',
+                  height: 200,
+                  width: 200,
+                ),
+              ),
+
+              const SizedBox(height: 40),
+
+              Text(
+                "Terima kasih, $nama dari $kota telah mendaftar.",
+                style: GoogleFonts.poppins(fontSize: 20),
+
+                textAlign: TextAlign.center,
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text("Lanjut ke homepage ---> "),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const HomePage(),
+                          ),
+                        );
+                      },
+
+                      child: const Text(
+                        " KLIK Lanjutkan",
+                        style: TextStyle(
+                          color: Color.fromARGB(150, 135, 32, 153),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
           ),
         ),
       ),
