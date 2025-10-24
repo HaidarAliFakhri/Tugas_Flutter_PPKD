@@ -47,7 +47,7 @@ class _FormPendaftaranState extends State<FormPendaftaran> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => HalamanKonfirmasi(
+                      builder: (context) => HalamanKonfirmasiday18(
                         nama: namaController.text,
                         kota: kotaController.text,
                       ),

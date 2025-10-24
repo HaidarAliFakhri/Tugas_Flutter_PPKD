@@ -3,14 +3,14 @@ import 'package:haidar_ppkd/tugas/hari16/buttom_nav_tugas8.dart';
 import 'package:haidar_ppkd/tugas/hari18/tugas10.dart';
 import 'package:haidar_ppkd/tugas/preferences/preference_handler.dart';
 
-class LoginPageCanva extends StatefulWidget {
-  const LoginPageCanva({super.key});
-  static const id = "/LoginPageCanva";
+class LoginPageCanva11 extends StatefulWidget {
+  const LoginPageCanva11({super.key});
+  static const id = "/LoginPageCanva11";
   @override
-  State<LoginPageCanva> createState() => _LoginPageCanvaState();
+  State<LoginPageCanva11> createState() => _LoginPageCanva11State();
 }
 
-class _LoginPageCanvaState extends State<LoginPageCanva> {
+class _LoginPageCanva11State extends State<LoginPageCanva11> {
   final _formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();

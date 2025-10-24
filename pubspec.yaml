@@ -36,6 +36,8 @@ dependencies:
     sdk: flutter
   google_fonts: ^4.0.3
   intl: ^0.20.0
+  path: ^1.9.1
+  path_provider: ^2.1.5
   shared_preferences: ^2.5.3
   sqflite: ^2.4.2
 
@@ -57,7 +59,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
-    
+    - assets/images/logoHaiTime/
+    - assets/images/alatDapur/
+    - assets/images/iconss/
     #   - images/a_dot_burr.jpeg
     #   - images/a_dot_ham.jpeg
     # An image asset can refer to one or more resolution-specific "variants", see

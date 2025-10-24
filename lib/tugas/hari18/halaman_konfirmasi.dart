@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:haidar_ppkd/tugas/bottom_nav.dart';
 
-class HalamanKonfirmasi extends StatelessWidget {
+class HalamanKonfirmasiday18 extends StatelessWidget {
   final String nama;
   final String kota;
 
-  const HalamanKonfirmasi({super.key, required this.nama, required this.kota});
+  const HalamanKonfirmasiday18({
+    super.key,
+    required this.nama,
+    required this.kota,
+  });
 
   @override
   Widget build(BuildContext context) {
