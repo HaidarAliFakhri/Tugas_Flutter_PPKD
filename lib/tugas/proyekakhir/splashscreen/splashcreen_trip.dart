@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-//import 'package:haidar_ppkd/tugas/bottom_nav.dart';
-import 'package:haidar_ppkd/tugas/hari16/buttom_nav_tugas8.dart';
 import 'package:haidar_ppkd/tugas/preferences/preference_handler.dart';
-import 'package:haidar_ppkd/tugas/day_18/Login_Page.dart';
-class SplashScreenDay18 extends StatefulWidget {
-  const SplashScreenDay18({super.key});
+import 'package:haidar_ppkd/tugas/proyekakhir/loginpagetrip.dart';
+import 'package:haidar_ppkd/tugas/tugas11/pages/drawer_haitime.dart';
+import 'package:haidar_ppkd/tugas/tugas11/pages/login_page_haitime.dart';
+
+class SplashScreenDayHaiTrip extends StatefulWidget {
+  const SplashScreenDayHaiTrip({super.key});
 
   @override
-  State<SplashScreenDay18> createState() => _SplashScreenDay18State();
+  State<SplashScreenDayHaiTrip> createState() => _SplashScreenDayHaiTripState();
 }
 
-class _SplashScreenDay18State extends State<SplashScreenDay18> {
+class _SplashScreenDayHaiTripState extends State<SplashScreenDayHaiTrip> {
   @override
   void initState() {
     super.initState();
@@ -18,19 +19,19 @@ class _SplashScreenDay18State extends State<SplashScreenDay18> {
   }
 
   isLoginFunction() async {
-    Future.delayed(Duration(seconds: 5)).then((value) async {
+    Future.delayed(Duration(seconds: 3)).then((value) async {
       var isLogin = await PreferenceHandler.getLogin();
       print(isLogin);
       if (isLogin != null && isLogin == true) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => Tugas8Page()),
+          MaterialPageRoute(builder: (context) => DrawerHaitime()),
           (route) => false,
         );
       } else {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => LoginPageCanva()),
+          MaterialPageRoute(builder: (context) => HaiTrip()),
           (route) => false,
         );
       }
@@ -44,7 +45,7 @@ class _SplashScreenDay18State extends State<SplashScreenDay18> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(child: Image.asset('assets/images/jempol.jpg')),
+          Center(child: Image.asset('assets/images/logoHaiTime/jempol.jpg')),
           Text(
             "Welcome!!",
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),

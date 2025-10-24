@@ -214,11 +214,11 @@ class _LoginPageState extends State<LoginPageHaitime> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _socialButton("assets/iconss/google.jpg"),
+                        _socialButton("assets/images/iconss/google.jpg"),
                         const SizedBox(width: 20),
-                        _socialButton("assets/iconss/apple.jpg"),
+                        _socialButton("assets/images/iconss/apple.jpg"),
                         const SizedBox(width: 20),
-                        _socialButton("assets/iconss/twitter.jpg"),
+                        _socialButton("assets/images/iconss/twitter.jpg"),
                       ],
                     ),
 
