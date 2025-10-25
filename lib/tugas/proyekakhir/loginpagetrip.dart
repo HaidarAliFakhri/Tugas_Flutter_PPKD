@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:haidar_ppkd/tugas/hari18/tugas10.dart';
+
 import 'package:haidar_ppkd/tugas/preferences/preference_handler.dart';
+import 'package:haidar_ppkd/tugas/proyekakhir/admin/dashboard_admin.dart';
 import 'package:haidar_ppkd/tugas/proyekakhir/pages/homepagetg.dart';
 import 'package:haidar_ppkd/tugas/proyekakhir/pages/homepagetrip.dart';
+import 'package:haidar_ppkd/tugas/proyekakhir/screens/drawertrip.dart';
 import 'package:haidar_ppkd/tugas/proyekakhir/screens/form_pendaftaran.dart';
 import 'package:haidar_ppkd/tugas/proyekakhir/screens/form_pendaftaran_tour_guide.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class HaiTrip extends StatefulWidget {
@@ -51,17 +54,17 @@ class _HaiTripState extends State<HaiTrip> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 40),
+            const SizedBox(height: 10),
 
             // Logo
             Center(
               child: Image.asset(
                 'assets/images/haitrip.png',
-                height: 120,
-                width: 120,
+                height: 100,
+                width: 100,
               ),
             ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 3),
 
               // Judul dan subjudul
               const Align(
@@ -84,7 +87,7 @@ class _HaiTripState extends State<HaiTrip> {
                 ),
               ),
 
-              const SizedBox(height: 30),
+              const SizedBox(height: 10),
 
               
               // Pilihan Role (Kiri-Kanan)
@@ -140,7 +143,7 @@ class _HaiTripState extends State<HaiTrip> {
                 ),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
 
               // Form Login
               Form(
@@ -214,76 +217,107 @@ class _HaiTripState extends State<HaiTrip> {
                       ),
                     ),
 
-                    const SizedBox(height: 5),
+                    
 
-                    // Tombol Login
-                    SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 0, 50, 77),
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                        ),
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            // Simpan status login
-                            await PreferenceHandler.saveLogin(true);
+                   // Tombol Login
+SizedBox(
+  width: double.infinity,
+  height: 50,
+  child: ElevatedButton(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: const Color.fromARGB(255, 0, 50, 77),
+      foregroundColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+    ),
+    onPressed: () async {
+      if (_formKey.currentState!.validate()) {
+        final prefs = await SharedPreferences.getInstance();
 
-                            // Snackbar sukses
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Login berhasil!')),
-                            );
+        final registeredEmail = prefs.getString('registered_email');
+        final registeredPassword = prefs.getString('registered_password');
 
-                            // Arahkan sesuai role
-                            if (selectedRole == "Wisatawan") {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const Homepagetrip(),
-                                ),
-                              );
-                            } else if (selectedRole == "Tour Guide") {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const Homepagetourguide(),
-                                ),
-                              );
-                            }
-                          } else {
-                            // Jika form belum valid
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: const Text("Validation Error"),
-                                  content: const Text(
-                                    "Silakan isi semua field dengan benar.",
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      child: const Text("OK"),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          }
-                        },
-                        child: const Text(
-                          "Login",
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ),
-                    ),
-                     const SizedBox(height: 20),
+        final emailInput = emailController.text.trim();
+        final passwordInput = passwordController.text.trim();
+
+        // 🔹 1. Cek dulu: apakah login sebagai ADMIN
+        if (emailInput == 'admin@haitrip.com' && passwordInput == 'admin123') {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Login sebagai Admin berhasil!')),
+          );
+
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (_) => const DashboardAdminPage()),
+          );
+          return; // stop di sini kalau admin
+        }
+
+        // 🔹 2. Cek login sesuai role yang dipilih
+        if (selectedRole == "Wisatawan") {
+          if (emailInput == registeredEmail &&
+              passwordInput == registeredPassword) {
+            await PreferenceHandler.saveLogin(true);
+
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Login berhasil sebagai Wisatawan!')),
+            );
+
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => const DrawerHaiTrip()),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Email atau password salah!'),
+                backgroundColor: Colors.redAccent,
+              ),
+            );
+          }
+        } else if (selectedRole == "Tour Guide") {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Login sebagai Tour Guide')),
+          );
+
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (_) => const Homepagetourguide(),
+            ),
+          );
+        }
+      } else {
+        // Jika form belum valid
+        showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text("Validation Error"),
+              content: const Text(
+                "Silakan isi semua field dengan benar.",
+              ),
+              actions: [
+                TextButton(
+                  child: const Text("OK"),
+                  onPressed: () => Navigator.pop(context),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    },
+    child: const Text(
+      "Login",
+      style: TextStyle(fontSize: 18),
+    ),
+  ),
+),
+
+
+                     const SizedBox(height: 15),
                       Row(
                       children: const [
                         Expanded(
@@ -308,7 +342,7 @@ class _HaiTripState extends State<HaiTrip> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 6),
 
                     // Tombol sosial media
                     Row(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../db/db_helper_haitrip.dart';
 import '../models/participant.dart';
 
@@ -6,17 +7,21 @@ class FormPendaftaranWisatawan extends StatefulWidget {
   const FormPendaftaranWisatawan({super.key});
 
   @override
-  State<FormPendaftaranWisatawan> createState() => _FormPendaftaranWisatawanState();
+  State<FormPendaftaranWisatawan> createState() =>
+      _FormPendaftaranWisatawanState();
 }
 
-class _FormPendaftaranWisatawanState extends State<FormPendaftaranWisatawan> {
+class _FormPendaftaranWisatawanState
+    extends State<FormPendaftaranWisatawan> {
   final _formKey = GlobalKey<FormState>();
   final _nameC = TextEditingController();
   final _emailC = TextEditingController();
   final _phoneC = TextEditingController();
   final _cityC = TextEditingController();
+  final _passwordC = TextEditingController();
 
   bool _isSaving = false;
+  bool _obscure = true;
 
   @override
   void dispose() {
@@ -24,6 +29,7 @@ class _FormPendaftaranWisatawanState extends State<FormPendaftaranWisatawan> {
     _emailC.dispose();
     _phoneC.dispose();
     _cityC.dispose();
+    _passwordC.dispose();
     super.dispose();
   }
 
@@ -39,11 +45,25 @@ class _FormPendaftaranWisatawanState extends State<FormPendaftaranWisatawan> {
     );
 
     try {
+      // Simpan ke database lokal
       await DBHelperTrip().insertParticipant(participant);
-      // kembali dan beri tahu caller agar list bisa refresh
-      Navigator.pop(context, true);
+
+      // Simpan data login ke SharedPreferences
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('registered_email', _emailC.text.trim());
+      await prefs.setString('registered_password', _passwordC.text.trim());
+      await prefs.setString('registered_name', _nameC.text.trim());
+      await prefs.setString('registered_phone', _phoneC.text.trim());
+      await prefs.setString('registered_city', _cityC.text.trim());
+
+      // Tampilkan pesan sukses
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Pendaftaran berhasil!')),
+      );
+
+      // Kembali ke halaman login
+      Navigator.pop(context);
     } catch (e) {
-      // fallback error
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('Gagal menyimpan: $e')),
       );
@@ -55,92 +75,143 @@ class _FormPendaftaranWisatawanState extends State<FormPendaftaranWisatawan> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true, // penting agar background "naik" sampai belakang AppBar
-  appBar: AppBar(
-    title: const Text(
-      'Form Pendaftaran',
-      style: TextStyle(color: Color.fromARGB(255, 0, 0, 0)),
-    ),
-    backgroundColor: Colors.transparent,
-    elevation: 0,
-    centerTitle: true,
-  ),
-      body: Stack(
-  children: [
-    // Gambar background
-    Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/images/logoHaiTime/Bg.jpg"),
-          fit: BoxFit.cover,
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        title: const Text(
+          'Form Pendaftaran',
+          style: TextStyle(color: Colors.black),
         ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        centerTitle: true,
       ),
-    ),
+      body: Stack(
+        children: [
+          // Background
+          Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/logoHaiTime/Bg.jpg"),
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+          Container(color: Colors.black.withOpacity(0.25)),
 
-    // Overlay hitam transparan
-    Container(
-      color: Colors.black.withOpacity(0.25),
-    ),
+          // Form isi
+          SafeArea(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    const SizedBox(height: 40),
 
-    // Konten utama (form login)
-    SafeArea(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const SizedBox(height: 40),
-              TextFormField(
-                controller: _nameC,
-                decoration: const InputDecoration(labelText: 'Nama'),
-                validator: (v) =>
-                    v == null || v.trim().isEmpty ? 'Nama wajib diisi' : null,
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
-                controller: _emailC,
-                decoration: const InputDecoration(labelText: 'Email'),
-                validator: (v) {
-                  if (v == null || v.trim().isEmpty) return 'Email wajib diisi';
-                  final pattern =
-                      RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
-                  if (!pattern.hasMatch(v.trim())) return 'Format email salah';
-                  return null;
-                },
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
-                controller: _phoneC,
-                decoration: const InputDecoration(labelText: 'Nomor HP'),
-                keyboardType: TextInputType.phone,
-                validator: (v) =>
-                    v == null || v.trim().isEmpty ? 'Nomor HP wajib' : null,
-              ),
-              const SizedBox(height: 12),
-              TextFormField(
-                controller: _cityC,
-                decoration: const InputDecoration(labelText: 'Asal Kota'),
-                validator: (v) =>
-                    v == null || v.trim().isEmpty ? 'Asal kota wajib' : null,
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: _isSaving ? null : _save,
-                  child: _isSaving
-                      ? const SizedBox(
-                          height: 18,
-                          width: 18,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Text('Simpan'),
+                    TextFormField(
+                      controller: _nameC,
+                      decoration: const InputDecoration(
+                        labelText: 'Nama Lengkap',
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (v) =>
+                          v == null || v.trim().isEmpty ? 'Nama wajib diisi' : null,
+                    ),
+                    const SizedBox(height: 12),
+
+                    TextFormField(
+                      controller: _emailC,
+                      decoration: const InputDecoration(
+                        labelText: 'Email',
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (v) {
+                        if (v == null || v.trim().isEmpty) return 'Email wajib diisi';
+                        final pattern = RegExp(
+                            r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
+                        if (!pattern.hasMatch(v.trim())) return 'Format email salah';
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 12),
+
+                    TextFormField(
+                      controller: _passwordC,
+                      obscureText: _obscure,
+                      decoration: InputDecoration(
+                        labelText: 'Password',
+                        border: const OutlineInputBorder(),
+                        suffixIcon: IconButton(
+                          icon: Icon(
+                            _obscure ? Icons.visibility_off : Icons.visibility,
+                          ),
+                          onPressed: () {
+                            setState(() => _obscure = !_obscure);
+                          },
+                        ),
+                      ),
+                      validator: (v) {
+                        if (v == null || v.trim().isEmpty) {
+                          return 'Password wajib diisi';
+                        } else if (v.length < 6) {
+                          return 'Minimal 6 karakter';
+                        }
+                        return null;
+                      },
+                    ),
+                    const SizedBox(height: 12),
+
+                    TextFormField(
+                      controller: _phoneC,
+                      keyboardType: TextInputType.phone,
+                      decoration: const InputDecoration(
+                        labelText: 'Nomor HP',
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (v) =>
+                          v == null || v.trim().isEmpty ? 'Nomor HP wajib diisi' : null,
+                    ),
+                    const SizedBox(height: 12),
+
+                    TextFormField(
+                      controller: _cityC,
+                      decoration: const InputDecoration(
+                        labelText: 'Asal Kota',
+                        border: OutlineInputBorder(),
+                      ),
+                      validator: (v) =>
+                          v == null || v.trim().isEmpty ? 'Asal kota wajib diisi' : null,
+                    ),
+
+                    const SizedBox(height: 24),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF0077B6),
+                          padding: const EdgeInsets.symmetric(vertical: 14),
+                        ),
+                        onPressed: _isSaving ? null : _save,
+                        child: _isSaving
+                            ? const SizedBox(
+                                height: 18,
+                                width: 18,
+                                child: CircularProgressIndicator(strokeWidth: 2),
+                              )
+                            : const Text(
+                                'Simpan',
+                                style: TextStyle(fontSize: 16),
+                              ),
+                      ),
+                    ),
+                    const SizedBox(height: 40),
+                  ],
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
-   ],), );
+    );
   }
 }

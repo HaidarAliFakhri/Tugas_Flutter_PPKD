@@ -57,4 +57,5 @@ class DBHelperTrip {
     return await db.update('participants', p.toMap(),
         where: 'id = ?', whereArgs: [p.id]);
   }
+
 }

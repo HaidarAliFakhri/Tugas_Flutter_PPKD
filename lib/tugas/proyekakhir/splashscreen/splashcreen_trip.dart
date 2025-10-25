@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:haidar_ppkd/tugas/preferences/preference_handler.dart';
 import 'package:haidar_ppkd/tugas/proyekakhir/loginpagetrip.dart';
 import 'package:haidar_ppkd/tugas/tugas11/pages/drawer_haitime.dart';
-import 'package:haidar_ppkd/tugas/tugas11/pages/login_page_haitime.dart';
+
 
 class SplashScreenDayHaiTrip extends StatefulWidget {
   const SplashScreenDayHaiTrip({super.key});

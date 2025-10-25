@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:haidar_ppkd/tugas/proyekakhir/loginpagetrip.dart';
 
-import 'package:haidar_ppkd/tugas/tugas11/splash_screen/splash_screen_haitime.dart';
+
 
 
 void main() {
@@ -19,7 +20,7 @@ class HaiTripApp extends StatelessWidget {
         primaryColor: const Color.fromARGB(255, 255, 255, 255),
         scaffoldBackgroundColor: const Color(0xFFE3F2FD),
       ),
-      home: const SplashScreenDayHaiTime(),
+      home: const HaiTrip(),
     );
   }
 }
