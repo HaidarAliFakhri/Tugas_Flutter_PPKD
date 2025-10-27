@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:haidar_ppkd/tugas/Tugas11haitrip/admin/dashboard_admin.dart';
+import 'package:haidar_ppkd/tugas/Tugas11haitrip/pages/homepagetg.dart';
+import 'package:haidar_ppkd/tugas/Tugas11haitrip/screens/drawertrip.dart';
+import 'package:haidar_ppkd/tugas/Tugas11haitrip/screens/form_pendaftaran.dart';
+import 'package:haidar_ppkd/tugas/Tugas11haitrip/screens/form_pendaftaran_tour_guide.dart';
 import 'package:haidar_ppkd/tugas/preferences/preference_handler.dart';
-import 'package:haidar_ppkd/tugas/proyekakhir/admin/dashboard_admin.dart';
-import 'package:haidar_ppkd/tugas/proyekakhir/pages/homepagetg.dart';
-import 'package:haidar_ppkd/tugas/proyekakhir/screens/drawertrip.dart';
-import 'package:haidar_ppkd/tugas/proyekakhir/screens/form_pendaftaran.dart';
-import 'package:haidar_ppkd/tugas/proyekakhir/screens/form_pendaftaran_tour_guide.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HaiTrip extends StatefulWidget {

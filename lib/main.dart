@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:haidar_ppkd/tugas/proyekakhir/splashscreen/splashcreen_trip.dart';
+import 'package:haidar_ppkd/tugas/Tugas11haitrip/splashscreen/splashcreen_trip.dart';
 
 void main() {
   runApp(const HaiTripApp());

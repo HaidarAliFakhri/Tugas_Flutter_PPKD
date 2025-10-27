@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:haidar_ppkd/tugas/proyekakhir/loginpagetrip.dart';
+import 'package:haidar_ppkd/tugas/Tugas11haitrip/loginpagetrip.dart';
 
 import '../db/db_helper_haitrip.dart';
 import '../models/participant.dart';

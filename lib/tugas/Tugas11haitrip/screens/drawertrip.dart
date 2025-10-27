@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:haidar_ppkd/tugas/proyekakhir/loginpagetrip.dart';
-import 'package:haidar_ppkd/tugas/proyekakhir/pages/homepagetrip.dart';
-import 'package:haidar_ppkd/tugas/proyekakhir/screens/cuacatrip.dart';
-import 'package:haidar_ppkd/tugas/proyekakhir/screens/profiltrip.dart';
+import 'package:haidar_ppkd/tugas/Tugas11haitrip/loginpagetrip.dart';
+import 'package:haidar_ppkd/tugas/Tugas11haitrip/pages/homepagetrip.dart';
+import 'package:haidar_ppkd/tugas/Tugas11haitrip/screens/cuacatrip.dart';
+import 'package:haidar_ppkd/tugas/Tugas11haitrip/screens/profiltrip.dart';
 
 class DrawerHaiTrip extends StatefulWidget {
   const DrawerHaiTrip({super.key});
