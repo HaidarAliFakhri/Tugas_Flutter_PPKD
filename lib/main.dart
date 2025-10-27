@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:haidar_ppkd/tugas/proyekakhir/loginpagetrip.dart';
-
-
-
+import 'package:haidar_ppkd/tugas/proyekakhir/splashscreen/splashcreen_trip.dart';
 
 void main() {
   runApp(const HaiTripApp());
@@ -20,7 +17,7 @@ class HaiTripApp extends StatelessWidget {
         primaryColor: const Color.fromARGB(255, 255, 255, 255),
         scaffoldBackgroundColor: const Color(0xFFE3F2FD),
       ),
-      home: const HaiTrip(),
+      home: const SplashScreenDayHaiTrip(),
     );
   }
 }

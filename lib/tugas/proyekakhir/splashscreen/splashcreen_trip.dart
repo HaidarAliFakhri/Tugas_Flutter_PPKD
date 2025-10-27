@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:haidar_ppkd/tugas/preferences/preference_handler.dart';
 import 'package:haidar_ppkd/tugas/proyekakhir/loginpagetrip.dart';
-import 'package:haidar_ppkd/tugas/tugas11/pages/drawer_haitime.dart';
-
+import 'package:haidar_ppkd/tugas/proyekakhir/screens/drawertrip.dart';
 
 class SplashScreenDayHaiTrip extends StatefulWidget {
   const SplashScreenDayHaiTrip({super.key});
@@ -25,7 +24,7 @@ class _SplashScreenDayHaiTripState extends State<SplashScreenDayHaiTrip> {
       if (isLogin != null && isLogin == true) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => DrawerHaitime()),
+          MaterialPageRoute(builder: (context) => DrawerHaiTrip()),
           (route) => false,
         );
       } else {

@@ -8,14 +8,14 @@ class DbHelper {
   static const tableUser = 'users';
   static const tableCuaca = 'cuaca';
 
-  // INIT DATABASE
+  // === INIT DATABASE ===
   static Future<Database> db() async {
     final dbPath = await getDatabasesPath();
     return openDatabase(
       join(dbPath, 'haitime.db'),
       version: 2,
       onCreate: (db, version) async {
-        // Tabel user
+        // tabel user
         await db.execute('''
           CREATE TABLE $tableUser(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -25,7 +25,7 @@ class DbHelper {
           )
         ''');
 
-        // Tabel cuaca
+        // tabel cuaca
         await db.execute('''
           CREATE TABLE $tableCuaca(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -37,7 +37,7 @@ class DbHelper {
         ''');
       },
       onUpgrade: (db, oldVersion, newVersion) async {
-        // kalau nanti upgrade ke versi lebih tinggi, bisa tambahkan logika di sini
+        // kalau versi naik, buat tabel baru jika belum ada
         if (newVersion > oldVersion) {
           await db.execute('''
             CREATE TABLE IF NOT EXISTS $tableCuaca(
@@ -53,7 +53,7 @@ class DbHelper {
     );
   }
 
-  // ===== USER CRUD =====
+  // === USER CRUD ===
 
   static Future<void> registerUser(UserModel user) async {
     final dbs = await db();
@@ -74,13 +74,21 @@ class DbHelper {
       where: 'email = ? AND password = ?',
       whereArgs: [email, password],
     );
+
     if (results.isNotEmpty) {
       return UserModel.fromMap(results.first);
     }
     return null;
   }
 
-  // ===== CUACA CRUD =====
+  // ✅ tambahkan fungsi ini — biar bisa ambil semua user dari tabel
+  static Future<List<UserModel>> getAllUser() async {
+    final dbs = await db();
+    final List<Map<String, dynamic>> results = await dbs.query(tableUser);
+    return results.map((e) => UserModel.fromMap(e)).toList();
+  }
+
+  // === CUACA CRUD ===
 
   static Future<void> createCuaca(CuacaModel cuaca) async {
     final dbs = await db();

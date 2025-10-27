@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:haidar_ppkd/tugas/tugas11/db/db_helper.dart';
+import 'package:haidar_ppkd/tugas/tugas11/models/user_model.dart';
 import 'package:haidar_ppkd/tugas/tugas11/pages/login_page_haitime.dart';
-
-import '../db/db_helper.dart';
-import '../models/user_model.dart';
 
 class FormPendaftaranHaiTime extends StatefulWidget {
   const FormPendaftaranHaiTime({super.key});
@@ -17,13 +16,14 @@ class _FormPendaftaranHaiTimeState extends State<FormPendaftaranHaiTime> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool _isHidden = true;
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
         children: [
-          // Background langit seperti login
+          // 🌤 Background langit
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
@@ -34,7 +34,7 @@ class _FormPendaftaranHaiTimeState extends State<FormPendaftaranHaiTime> {
           ),
           Container(color: Colors.black.withOpacity(0.25)),
 
-          // Form register
+          // 🧾 Form register
           Center(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -136,41 +136,53 @@ class _FormPendaftaranHaiTimeState extends State<FormPendaftaranHaiTime> {
                             borderRadius: BorderRadius.circular(15),
                           ),
                         ),
-                        onPressed: () async {
-                          if (_formKey.currentState!.validate()) {
-                            final user = UserModel(
-                              username: usernameController.text,
-                              email: emailController.text,
-                              password: passwordController.text,
-                            );
+                        onPressed: _isLoading
+                            ? null
+                            : () async {
+                                if (_formKey.currentState!.validate()) {
+                                  setState(() => _isLoading = true);
 
-                            await DbHelper.registerUser(user);
+                                  final user = UserModel(
+                                    username: usernameController.text.trim(),
+                                    email: emailController.text.trim(),
+                                    password: passwordController.text.trim(),
+                                  );
 
-                            if (mounted) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text("Pendaftaran berhasil!"),
-                                  backgroundColor: Colors.green,
+                                  await DbHelper.registerUser(user);
+                                  debugPrint(
+                                    "✅ User tersimpan: ${user.toMap()}",
+                                  );
+
+                                  if (mounted) {
+                                    setState(() => _isLoading = false);
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text("Pendaftaran berhasil!"),
+                                        backgroundColor: Colors.green,
+                                      ),
+                                    );
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginPageHaitime(),
+                                      ),
+                                    );
+                                  }
+                                }
+                              },
+                        child: _isLoading
+                            ? const CircularProgressIndicator(
+                                color: Colors.white,
+                              )
+                            : const Text(
+                                "Daftar",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
                                 ),
-                              );
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      const LoginPageHaitime(),
-                                ),
-                              );
-                            }
-                          }
-                        },
-                        child: const Text(
-                          "Daftar",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                              ),
                       ),
                     ),
                     const SizedBox(height: 16),

@@ -152,7 +152,8 @@ class _LoginPageState extends State<LoginPageHaitime> {
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) => const DrawerHaitime(),
+                                    builder: (context) =>
+                                        DrawerHaitime(user: user),
                                   ),
                                 );
                               }

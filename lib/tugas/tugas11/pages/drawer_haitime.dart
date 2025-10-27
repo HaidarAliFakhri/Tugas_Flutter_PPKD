@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:haidar_ppkd/tugas/tugas11/models/user_model.dart';
 import 'package:haidar_ppkd/tugas/tugas11/pages/list_catatan.dart';
 import 'package:haidar_ppkd/tugas/tugas11/pages/list_cuaca.dart';
 import 'package:haidar_ppkd/tugas/tugas11/pages/list_jadwal_sholat.dart';
 import 'package:haidar_ppkd/tugas/tugas11/pages/login_page_haitime.dart';
+import 'package:haidar_ppkd/tugas/tugas11/pages/profilhaitime.dart';
 
 class DrawerHaitime extends StatefulWidget {
-  const DrawerHaitime({super.key});
+  final UserModel user;
+  const DrawerHaitime({super.key, required this.user});
 
   @override
   State<DrawerHaitime> createState() => _DrawerHaitimeState();
@@ -30,53 +33,68 @@ class _DrawerHaitimeState extends State<DrawerHaitime> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Drawer")),
-
+      appBar: AppBar(title: const Text("HaiTime")),
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            // Bagian header drawer
-            const UserAccountsDrawerHeader(
-              accountName: Text("haidar"),
-              accountEmail: Text("haidar@gmail.com"),
-              currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage(
-                  "assets/images/logoHaiTime/haidar.jpg",
-                ),
+            // Header drawer
+            UserAccountsDrawerHeader(
+              decoration: const BoxDecoration(color: Color(0xFF42A5F5)),
+              accountName: Text(
+                widget.user.username,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              decoration: BoxDecoration(
-                color: Color.fromARGB(255, 44, 95, 158),
+              accountEmail: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(widget.user.email),
+                  Text(
+                    widget.user.password,
+                    style: const TextStyle(fontSize: 12, color: Colors.white70),
+                  ),
+                ],
+              ),
+              currentAccountPicture: const CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Icon(Icons.person, size: 40, color: Colors.blue),
               ),
             ),
 
+            // Menu drawer
             ListTile(
-              leading: const Icon(Icons.cloudy_snowing),
+              leading: const Icon(Icons.cloud),
               title: const Text("Cuaca"),
-              onTap: () {
-                onTapDrawer(0);
-              },
+              onTap: () => onTapDrawer(0),
             ),
             const Divider(),
 
             ListTile(
               leading: const Icon(Icons.punch_clock),
               title: const Text("Jadwal Sholat"),
-              onTap: () {
-                onTapDrawer(1);
-              },
+              onTap: () => onTapDrawer(1),
             ),
             const Divider(),
 
             ListTile(
               leading: const Icon(Icons.note),
               title: const Text("Pengingat Catatan"),
+              onTap: () => onTapDrawer(2),
+            ),
+            const Divider(),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text("Profil Saya"),
               onTap: () {
-                onTapDrawer(2);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ProfilTime()),
+                );
               },
             ),
+            const Divider(),
 
-            Divider(),
+            // Logout
             ListTile(
               leading: const Icon(Icons.logout, color: Colors.redAccent),
               title: const Text(
@@ -88,7 +106,9 @@ class _DrawerHaitimeState extends State<DrawerHaitime> {
                   context: context,
                   builder: (context) => AlertDialog(
                     title: const Text("Konfirmasi"),
-                    content: const Text("Yakin ingin keluar dari HaiTime?"),
+                    content: const Text(
+                      "Yakin ingin keluar dari aplikasi HaiTime?",
+                    ),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(context, false),
@@ -103,7 +123,6 @@ class _DrawerHaitimeState extends State<DrawerHaitime> {
                 );
 
                 if (confirm == true && context.mounted) {
-                  // Pindah ke halaman login dan hapus semua route sebelumnya
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(
@@ -118,6 +137,7 @@ class _DrawerHaitimeState extends State<DrawerHaitime> {
         ),
       ),
 
+      // Konten utama berdasarkan menu yang dipilih
       body: _widgetOptions[_selectedIndex],
     );
   }

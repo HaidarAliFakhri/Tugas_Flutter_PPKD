@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:haidar_ppkd/tugas/proyekakhir/loginpagetrip.dart';
-
 import 'package:haidar_ppkd/tugas/proyekakhir/pages/homepagetrip.dart';
 import 'package:haidar_ppkd/tugas/proyekakhir/screens/cuacatrip.dart';
 import 'package:haidar_ppkd/tugas/proyekakhir/screens/profiltrip.dart';
@@ -17,9 +16,9 @@ class _DrawerHaiTripState extends State<DrawerHaiTrip> {
 
   // daftar halaman yang muncul saat menu drawer dipilih
   static final List<Widget> _widgetOptions = [
-    const Homepagetrip(),  // halaman utama wisatawan
-    const CuacaTrip(),     // contoh halaman cuaca
-    const ProfilTrip(),    // contoh halaman profil
+    const Homepagetrip(),
+    const CuacaTrip(),
+    const ProfilTrip(),
   ];
 
   void onTapDrawer(int index) {
@@ -47,7 +46,9 @@ class _DrawerHaiTripState extends State<DrawerHaiTrip> {
               accountName: Text("Haidar"),
               accountEmail: Text("haidar@gmail.com"),
               currentAccountPicture: CircleAvatar(
-                backgroundImage: AssetImage("assets/images/logoHaiTime/haidar.jpg"),
+                backgroundImage: AssetImage(
+                  "assets/images/logoHaiTime/haidar.jpg",
+                ),
               ),
               decoration: BoxDecoration(color: Color(0xFF0077B6)),
             ),

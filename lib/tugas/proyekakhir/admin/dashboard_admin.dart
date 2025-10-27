@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:haidar_ppkd/tugas/proyekakhir/loginpagetrip.dart';
+
 import '../db/db_helper_haitrip.dart';
 import '../models/participant.dart';
-
 
 class DashboardAdminPage extends StatefulWidget {
   const DashboardAdminPage({super.key});
@@ -29,9 +29,9 @@ class _DashboardAdminPageState extends State<DashboardAdminPage> {
         _participants = data;
       });
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Gagal memuat data: $e")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Gagal memuat data: $e")));
     } finally {
       setState(() => _isLoading = false);
     }
@@ -41,13 +41,13 @@ class _DashboardAdminPageState extends State<DashboardAdminPage> {
     try {
       await DBHelperTrip().deleteParticipant(id);
       await _fetchParticipants();
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Akun berhasil dihapus!")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Akun berhasil dihapus!")));
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Gagal menghapus: $e")),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("Gagal menghapus: $e")));
     }
   }
 
@@ -106,102 +106,103 @@ class _DashboardAdminPageState extends State<DashboardAdminPage> {
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _participants.isEmpty
-              ? const Center(
-                  child: Text(
-                    "Belum ada akun terdaftar.",
-                    style: TextStyle(fontSize: 16, color: Colors.black54),
+          ? const Center(
+              child: Text(
+                "Belum ada akun terdaftar.",
+                style: TextStyle(fontSize: 16, color: Colors.black54),
+              ),
+            )
+          : ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: _participants.length,
+              itemBuilder: (context, index) {
+                final p = _participants[index];
+                return Card(
+                  margin: const EdgeInsets.only(bottom: 16),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
                   ),
-                )
-              : ListView.builder(
-                  padding: const EdgeInsets.all(16),
-                  itemCount: _participants.length,
-                  itemBuilder: (context, index) {
-                    final p = _participants[index];
-                    return Card(
-                      margin: const EdgeInsets.only(bottom: 16),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      elevation: 3,
-                      child: Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                  elevation: 3,
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
                           children: [
-                            Row(
-                              children: [
-                                const CircleAvatar(
-                                  radius: 26,
-                                  backgroundImage: AssetImage(
-                                    "assets/images/logoHaiTime/haidar.jpg",
-                                  ),
-                                ),
-                                const SizedBox(width: 12),
-                                Expanded(
-                                  child: Text(
-                                    p.name,
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
+                            const CircleAvatar(
+                              radius: 26,
+                              backgroundImage: AssetImage(
+                                "assets/images/logoHaiTime/haidar.jpg",
+                              ),
                             ),
-                            const SizedBox(height: 10),
-                            Text("📧 ${p.email}"),
-                            Text("📱 ${p.phone}"),
-                            Text("🌆 ${p.city}"),
-                            const SizedBox(height: 10),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(Icons.info_outline),
-                                  color: Colors.blue.shade700,
-                                  tooltip: "Detail Akun",
-                                  onPressed: () {
-                                    _showDetailDialog(context, p);
-                                  },
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Text(
+                                p.name,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                IconButton(
-                                  icon: const Icon(Icons.delete),
-                                  color: Colors.redAccent,
-                                  tooltip: "Hapus Akun",
-                                  onPressed: () async {
-                                    final confirm = await showDialog<bool>(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        title: const Text("Konfirmasi"),
-                                        content: Text(
-                                            "Yakin ingin menghapus akun '${p.name}'?"),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () =>
-                                                Navigator.pop(context, false),
-                                            child: const Text("Batal"),
-                                          ),
-                                          TextButton(
-                                            onPressed: () =>
-                                                Navigator.pop(context, true),
-                                            child: const Text("Hapus"),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                    if (confirm == true) {
-                                      await _deleteParticipant(p.id!);
-                                    }
-                                  },
-                                ),
-                              ],
+                              ),
                             ),
                           ],
                         ),
-                      ),
-                    );
-                  },
-                ),
+                        const SizedBox(height: 10),
+                        Text("📧 ${p.email}"),
+                        Text("📱 ${p.phone}"),
+                        Text("🌆 ${p.city}"),
+                        const SizedBox(height: 10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.info_outline),
+                              color: Colors.blue.shade700,
+                              tooltip: "Detail Akun",
+                              onPressed: () {
+                                _showDetailDialog(context, p);
+                              },
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.delete),
+                              color: Colors.redAccent,
+                              tooltip: "Hapus Akun",
+                              onPressed: () async {
+                                final confirm = await showDialog<bool>(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    title: const Text("Konfirmasi"),
+                                    content: Text(
+                                      "Yakin ingin menghapus akun '${p.name}'?",
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, false),
+                                        child: const Text("Batal"),
+                                      ),
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, true),
+                                        child: const Text("Hapus"),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                                if (confirm == true) {
+                                  await _deleteParticipant(p.id!);
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
     );
   }
 
@@ -238,9 +239,7 @@ class _DashboardAdminPageState extends State<DashboardAdminPage> {
                       ),
                       IconButton(
                         icon: Icon(
-                          obscure
-                              ? Icons.visibility_off
-                              : Icons.visibility,
+                          obscure ? Icons.visibility_off : Icons.visibility,
                         ),
                         onPressed: () => setState(() => obscure = !obscure),
                       ),
