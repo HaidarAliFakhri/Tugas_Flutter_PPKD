@@ -40,7 +40,9 @@ class _HaiTripState extends State<HaiTrip> {
           ),
 
           // Overlay hitam transparan
-          Container(color: Colors.black.withOpacity(0.25)),
+          Container(
+            color: const Color.fromARGB(255, 255, 255, 255).withOpacity(0.25),
+          ),
 
           // Konten utama (form login)
           SafeArea(
