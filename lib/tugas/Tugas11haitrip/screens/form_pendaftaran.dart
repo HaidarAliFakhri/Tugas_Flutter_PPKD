@@ -105,12 +105,61 @@ class _FormPendaftaranWisatawanState extends State<FormPendaftaranWisatawan> {
     }
   }
 
-  Future<void> _deleteParticipant(int id) async {
-    await DBHelperTrip().deleteParticipant(id);
-    _fetchParticipants();
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Data berhasil dihapus')));
+  Future<void> _onDelete(Participant participant) async {
+    final res = await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: const Text(
+            "Hapus Akun",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.warning_amber_rounded,
+                  color: Colors.redAccent, size: 48),
+              const SizedBox(height: 12),
+              Text(
+                "Apakah kamu yakin ingin menghapus akun *${participant.name}*?",
+                textAlign: TextAlign.center,
+                style: const TextStyle(fontSize: 16),
+              ),
+            ],
+          ),
+          actionsAlignment: MainAxisAlignment.spaceBetween,
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text(
+                "Batal",
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+            ElevatedButton.icon(
+              onPressed: () => Navigator.pop(context, true),
+              icon: const Icon(Icons.delete, size: 18),
+              label: const Text("Hapus"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.redAccent,
+              ),
+            ),
+          ],
+        );
+      },
+    );
+
+    if (res == true) {
+      await DBHelperTrip().deleteParticipant(participant.id!);
+      // misal kamu nanti punya _fetchParticipants untuk refresh daftar
+      // await _fetchParticipants(); 
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Akun ${participant.name} berhasil dihapus")),
+      );
+    }
   }
 
   @override
@@ -312,7 +361,7 @@ class _FormPendaftaranWisatawanState extends State<FormPendaftaranWisatawan> {
                                         color: Colors.red,
                                       ),
                                       onPressed: () =>
-                                          _deleteParticipant(p.id!),
+                                          _onDelete(p),
                                     ),
                                   ],
                                 ),
