@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:haidar_ppkd/tugas/Tugas11haitrip/splashscreen/splashcreen_trip.dart';
+//import 'package:haidar_ppkd/tugas/day_32/tugas14.dart/screens/homepage.dart';
+import 'package:haidar_ppkd/tugas/day_32/tugas14.dart/screens/splash_screen.dart';
+import 'package:haidar_ppkd/tugas/day_32/tugas14.dart/theme/app_theme.dart';
 
 void main() {
-  runApp(const HaiTripApp());
+  runApp(const MyApp());
 }
 
-class HaiTripApp extends StatelessWidget {
-  const HaiTripApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'HaiTrip',
-      theme: ThemeData(
-        primaryColor: const Color.fromARGB(255, 255, 255, 255),
-        scaffoldBackgroundColor: const Color(0xFFE3F2FD),
-      ),
-      home: const SplashScreenDayHaiTrip(),
+      title: 'Fake Store App',
+      theme: AppTheme.lightTheme,
+
+      home: const SplashScreenFakeStore(),
     );
   }
 }
