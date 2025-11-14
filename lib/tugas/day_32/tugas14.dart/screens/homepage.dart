@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:haidar_ppkd/tugas/day_32/tugas14.dart/apiService/api_service.dart';
+import 'package:haidar_ppkd/tugas/day_32/tugas14.dart/apiService/api_servicefake.dart';
 import 'package:haidar_ppkd/tugas/day_32/tugas14.dart/model/fakestore.dart';
 import 'package:haidar_ppkd/tugas/day_32/tugas14.dart/screens/cart_screen.dart';
 
@@ -17,7 +17,7 @@ class HomeScreenTugas14 extends StatefulWidget {
 
 class _HomeScreenTugas14State extends State<HomeScreenTugas14>
     with SingleTickerProviderStateMixin {
-  final ApiService apiService = ApiService();
+  final ApiServicefake apiService = ApiServicefake();
   late Future<List<ListStore>> _futureProducts;
   List<ListStore> _allProducts = [];
   List<ListStore> _filteredProducts = [];

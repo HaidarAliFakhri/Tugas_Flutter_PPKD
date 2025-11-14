@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-//import 'package:haidar_ppkd/tugas/day_32/tugas14.dart/screens/homepage.dart';
-import 'package:haidar_ppkd/tugas/day_32/tugas14.dart/screens/splash_screen.dart';
-import 'package:haidar_ppkd/tugas/day_32/tugas14.dart/theme/app_theme.dart';
+import 'package:haidar_ppkd/tugas/day_33/tugas15/pages/editprofile_page.dart';
+import 'package:haidar_ppkd/tugas/day_33/tugas15/pages/login_page.dart';
+import 'package:haidar_ppkd/tugas/day_33/tugas15/pages/profile_page.dart';
+import 'package:haidar_ppkd/tugas/day_33/tugas15/pages/register_page.dart';
+import 'package:haidar_ppkd/tugas/day_33/tugas15/pages/splash_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,10 +17,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Fake Store App',
-      theme: AppTheme.lightTheme,
+      title: "Hai Time App",
+      theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
 
-      home: const SplashScreenFakeStore(),
+      // Splash pertama kali jalan
+      initialRoute: "/splash",
+
+      // Daftar route aplikasi
+      routes: {
+        "/splash": (context) => SplashScreentugas15(),
+        "/login": (context) => LoginPagetugas15(),
+        "/register": (context) => RegisterPagetugas15(),
+        "/profile": (context) => ProfileInstagramPage(),
+        "/edit": (context) => EditProfileInstagramPage(),
+      },
     );
   }
 }

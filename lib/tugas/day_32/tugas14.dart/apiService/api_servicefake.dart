@@ -1,7 +1,7 @@
 import 'package:haidar_ppkd/tugas/day_32/tugas14.dart/model/fakestore.dart';
 import 'package:http/http.dart' as http;
 
-class ApiService {
+class ApiServicefake {
   final String baseUrl = "https://fakestoreapi.com/products";
 
   Future<List<ListStore>> getProducts() async {
