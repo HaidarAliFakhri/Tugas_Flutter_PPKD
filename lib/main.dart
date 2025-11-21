@@ -1,11 +1,16 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:haidar_ppkd/firebase_options.dart';
 import 'package:haidar_ppkd/tugas/day_33/tugas15/pages/editprofile_page.dart';
 import 'package:haidar_ppkd/tugas/day_33/tugas15/pages/login_page.dart';
 import 'package:haidar_ppkd/tugas/day_33/tugas15/pages/profile_page.dart';
 import 'package:haidar_ppkd/tugas/day_33/tugas15/pages/register_page.dart';
 import 'package:haidar_ppkd/tugas/day_33/tugas15/pages/splash_screen.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
-void main() {
+void main() async {
+  await initializeDateFormatting('id_ID', null);
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }

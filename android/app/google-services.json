@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "720104468064",
+    "project_id": "haidar-ppkd-639fc",
+    "storage_bucket": "haidar-ppkd-639fc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720104468064:android:9ec79a9f7cee94634edd05",
+        "android_client_info": {
+          "package_name": "com.example.haidar_ppkd"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCvycYflX0xDvIqlePLPowaLKUyBeN3PE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

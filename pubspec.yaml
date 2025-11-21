@@ -29,7 +29,10 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   circle_bottom_navigation: ^2.0.0
+  cloud_firestore: ^6.1.0
   cupertino_icons: ^1.0.8
+  firebase_auth: ^6.1.2
+  firebase_core: ^4.2.1
   flutter:
     sdk: flutter
   flutter_localizations:
